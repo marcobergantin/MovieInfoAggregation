@@ -1,4 +1,4 @@
-﻿using MovieAggreagator.DTOs;
+﻿using MovieAggregator.DTOs;
 using MovieAggregator.Contracts;
 using System;
 using System.Net.Http;

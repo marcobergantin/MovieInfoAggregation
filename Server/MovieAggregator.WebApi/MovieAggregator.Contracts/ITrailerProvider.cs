@@ -1,4 +1,4 @@
-﻿using MovieAggreagator.DTOs;
+﻿using MovieAggregator.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

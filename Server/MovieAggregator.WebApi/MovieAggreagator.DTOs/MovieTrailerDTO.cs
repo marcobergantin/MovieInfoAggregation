@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieAggreagator.DTOs
+namespace MovieAggregator.DTOs
 {
     public class MovieTrailerDTO
     {

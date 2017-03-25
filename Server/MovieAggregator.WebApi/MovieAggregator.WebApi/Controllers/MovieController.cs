@@ -3,7 +3,7 @@ using MovieInfoProvider.OMDb.ApiInteraction;
 using System.Threading.Tasks;
 using System.Web.Http;
 using VideoProvider.Youtube.ApiInteraction;
-using MovieAggreagator.DTOs;
+using MovieAggregator.DTOs;
 
 namespace MovieAggregator.WebApi.Controllers
 {

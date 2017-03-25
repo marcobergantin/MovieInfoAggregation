@@ -1,4 +1,4 @@
-﻿namespace MovieAggreagator.DTOs
+﻿namespace MovieAggregator.DTOs
 {
     public class MovieInfoDTO
     {

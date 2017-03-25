@@ -1,6 +1,6 @@
 ﻿using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using MovieAggreagator.DTOs;
+using MovieAggregator.DTOs;
 using MovieAggregator.Contracts;
 using System;
 using System.Collections.Generic;
