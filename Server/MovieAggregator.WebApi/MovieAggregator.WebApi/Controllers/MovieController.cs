@@ -1,16 +1,20 @@
 ﻿using MovieAggregator.Contracts;
-using MovieInfoProvider.OMDb.ApiInteraction;
 using System.Threading.Tasks;
 using System.Web.Http;
-using VideoProvider.Youtube.ApiInteraction;
 using MovieAggregator.DTOs;
 
 namespace MovieAggregator.WebApi.Controllers
 {
     public class MovieController : ApiController
     {
-        ITrailerProvider _videoProvider = new YoutubeVideoProvider();
-        IMovieInfoProvider _infoProvider = new OMDbMovieInfoProvider();
+        ITrailerProvider _trailerProvider;
+        IMovieInfoProvider _infoProvider;
+
+        public MovieController(IMovieInfoProvider infoProvider, ITrailerProvider trailerProvider)
+        {
+            _infoProvider = infoProvider;
+            _trailerProvider = trailerProvider;
+        }
 
         public async Task<IHttpActionResult> Get(string movieTitle)
         {
@@ -19,7 +23,7 @@ namespace MovieAggregator.WebApi.Controllers
             return Ok(new MovieAggregatedContentDTO()
                 {
                     Info = info,
-                    Trailer = await _videoProvider.GetTrailer(info.Title)
+                    Trailer = await _trailerProvider.GetTrailer(info.Title)
                 }
             );
         }
