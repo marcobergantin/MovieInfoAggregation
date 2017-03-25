@@ -2,19 +2,15 @@
 using Google.Apis.YouTube.v3;
 using MovieAggregator.DTOs;
 using MovieAggregator.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace VideoProvider.Youtube.ApiInteraction
 {
     public class YoutubeVideoProvider : ITrailerProvider
     {
-        private static readonly string ClientID = "tamtamassignment-162520";//ConfigurationManager.AppSettings["GoogleApisClientID"];
-        private static readonly string ClientSecret = "AIzaSyC5YxkHzX9YHBbcWP981DbYZJcZdnAX45Q";//ConfigurationManager.AppSettings["GoogleApisClientSecret"];
+        private static readonly string ClientID = ConfigurationManager.AppSettings["GoogleApisClientID"];
+        private static readonly string ClientSecret = ConfigurationManager.AppSettings["GoogleApisClientSecret"];
 
         public async Task<MovieTrailerDTO> GetTrailer(string movieTitle)
         {
