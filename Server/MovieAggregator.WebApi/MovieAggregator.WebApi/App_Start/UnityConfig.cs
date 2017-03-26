@@ -1,5 +1,6 @@
 using Microsoft.Practices.Unity;
 using MovieAggregator.Contracts;
+using MovieAggregator.WebApi.Services;
 using MovieInfoProvider.OMDb.ApiInteraction;
 using System.Web.Http;
 using Unity.WebApi;
@@ -13,11 +14,9 @@ namespace MovieAggregator.WebApi
         {
 			var container = new UnityContainer();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-            // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
+            container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>();
 
             config.DependencyResolver = new UnityDependencyResolver(container);
         }

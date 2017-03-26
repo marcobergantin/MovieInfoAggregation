@@ -1,5 +1,4 @@
 ﻿using MovieAggregator.DTOs;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.Contracts

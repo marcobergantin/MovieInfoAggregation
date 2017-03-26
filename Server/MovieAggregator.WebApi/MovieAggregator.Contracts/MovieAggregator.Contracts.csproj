@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMovieInfoAggregator.cs" />
     <Compile Include="IMovieInfoProvider.cs" />
     <Compile Include="ITrailerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
