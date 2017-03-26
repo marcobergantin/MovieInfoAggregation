@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieAggregator.Client.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         private static string MovieInfoEndpoint;
 
@@ -18,9 +19,9 @@ namespace MovieAggregator.Client.Controllers
             }
         }
 
-        public string Index()
+        public IActionResult Index()
         {          
-            return MovieInfoEndpoint;
+            return View("Index", MovieInfoEndpoint);
         }
     }
 }
