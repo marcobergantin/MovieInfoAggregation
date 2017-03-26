@@ -8,7 +8,7 @@ namespace MovieInfoProvider.OMDb.ApiInteraction
 {
     public class OMDbMovieInfoProvider : IMovieInfoProvider
     {
-        private const string BaseUrl = "http://www.omdbapi.com/?";
+        private const string BaseUrl = "http://www.omdbapi.com/";
         private const string TitleParamUrlKey = "t";
 
         public async Task<MovieInfoDTO> GetInfo(string movieTitle)
@@ -16,7 +16,7 @@ namespace MovieInfoProvider.OMDb.ApiInteraction
             using (HttpClient client = new HttpClient())
             {
                 string urlEncodedMovieTitle = Uri.EscapeUriString(movieTitle);
-                string requestUri = $"{BaseUrl}{TitleParamUrlKey}={urlEncodedMovieTitle}";
+                string requestUri = $"{BaseUrl}?{TitleParamUrlKey}={urlEncodedMovieTitle}";
                 HttpResponseMessage response = await client.GetAsync(requestUri);
                 if (response.IsSuccessStatusCode)
                 {
