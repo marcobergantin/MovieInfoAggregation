@@ -142,13 +142,13 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MovieAggreagator.DTOs\MovieAggregator.DTOs.csproj">
-      <Project>{6526bbab-40e6-44c0-8493-f63de2fbed3b}</Project>
-      <Name>MovieAggregator.DTOs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MovieAggregator.Contracts\MovieAggregator.Contracts.csproj">
       <Project>{16e8d13f-161e-4a90-bc50-5bfa6693edde}</Project>
       <Name>MovieAggregator.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieAggregator.DTOs\MovieAggregator.DTOs.csproj">
+      <Project>{5ee1ff65-f701-4bbb-a7c6-0d290f09bada}</Project>
+      <Name>MovieAggregator.DTOs</Name>
     </ProjectReference>
     <ProjectReference Include="..\MovieInfoProvider.OMDb.ApiInteraction\MovieInfoProvider.OMDb.ApiInteraction.csproj">
       <Project>{e96f1ab0-55d7-4623-b1b7-2ae1ea79726e}</Project>

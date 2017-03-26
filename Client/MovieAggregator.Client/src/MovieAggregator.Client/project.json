@@ -11,7 +11,8 @@
     "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "System.Net.Http": "4.3.0"
+    "System.Net.Http": "4.3.0",
+    "MovieAggregator.Client.DTOs": "1.0.0-*"
   },
 
   "tools": {

@@ -1,36 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Net.Http;
+using MovieAggregator.Client.Interfaces;
 
 namespace MovieAggregator.Client.Controllers
 {
     public class HomeController : Controller
     {
-        private static string MovieInfoEndpoint;
+        IMovieService _movieService;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IMovieService movieService)
         {
-            if (MovieInfoEndpoint == null)
-            {
-                MovieInfoEndpoint = configuration["Endpoints:MovieInfoEndpoint"];
-            }
+            _movieService = movieService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string movieTitle)
         {
-            string resultString = string.Empty;
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetAsync(MovieInfoEndpoint + "api/Movie?movieTitle=" + "spiderman");
-                response.EnsureSuccessStatusCode();
-                resultString = await response.Content.ReadAsStringAsync();
-            }
-
-            return View("Index", resultString);
+            return View("Index", await _movieService.GetMovieInfo(movieTitle));
         }
     }
 }

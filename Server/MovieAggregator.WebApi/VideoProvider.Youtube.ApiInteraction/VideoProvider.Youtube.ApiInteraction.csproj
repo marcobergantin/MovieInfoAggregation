@@ -81,13 +81,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MovieAggreagator.DTOs\MovieAggregator.DTOs.csproj">
-      <Project>{6526bbab-40e6-44c0-8493-f63de2fbed3b}</Project>
-      <Name>MovieAggregator.DTOs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MovieAggregator.Contracts\MovieAggregator.Contracts.csproj">
       <Project>{16e8d13f-161e-4a90-bc50-5bfa6693edde}</Project>
       <Name>MovieAggregator.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieAggregator.DTOs\MovieAggregator.DTOs.csproj">
+      <Project>{5ee1ff65-f701-4bbb-a7c6-0d290f09bada}</Project>
+      <Name>MovieAggregator.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

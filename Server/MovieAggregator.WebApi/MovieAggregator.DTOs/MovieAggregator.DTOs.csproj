@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6526BBAB-40E6-44C0-8493-F63DE2FBED3B}</ProjectGuid>
+    <ProjectGuid>{5EE1FF65-F701-4BBB-A7C6-0D290F09BADA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieAggreagator.DTOs</RootNamespace>
-    <AssemblyName>MovieAggreagator.DTOs</AssemblyName>
+    <RootNamespace>MovieAggregator.DTOs</RootNamespace>
+    <AssemblyName>MovieAggregator.DTOs</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

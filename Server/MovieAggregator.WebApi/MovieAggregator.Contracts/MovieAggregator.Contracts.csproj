@@ -46,8 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MovieAggreagator.DTOs\MovieAggregator.DTOs.csproj">
-      <Project>{6526BBAB-40E6-44C0-8493-F63DE2FBED3B}</Project>
+    <ProjectReference Include="..\MovieAggregator.DTOs\MovieAggregator.DTOs.csproj">
+      <Project>{5ee1ff65-f701-4bbb-a7c6-0d290f09bada}</Project>
       <Name>MovieAggregator.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
