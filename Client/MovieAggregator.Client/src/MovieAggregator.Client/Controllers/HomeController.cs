@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MovieAggregator.Client.Interfaces;
+using MovieAggregator.Client.ViewModels;
 
 namespace MovieAggregator.Client.Controllers
 {
@@ -13,9 +14,18 @@ namespace MovieAggregator.Client.Controllers
             _movieService = movieService;
         }
 
-        public async Task<IActionResult> Index(string movieTitle)
+        [HttpGet]
+        public IActionResult Index()
         {
-            return View("Index", await _movieService.GetMovieInfo(movieTitle));
+            return View("Index", new HomeViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(HomeViewModel inputViewModel)
+        {
+            var movieInfo = await _movieService.GetMovieInfo(inputViewModel.SearchQuery);
+            inputViewModel.MovieInfo = movieInfo;
+            return View("Index", inputViewModel);
         }
     }
 }

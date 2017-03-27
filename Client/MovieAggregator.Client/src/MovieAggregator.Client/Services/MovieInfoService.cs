@@ -20,15 +20,19 @@ namespace MovieAggregator.Client.Services
 
         public async Task<MovieAggregatedContentDTO> GetMovieInfo(string movieTitle)
         {
-            string resultString;
-            using (HttpClient client = new HttpClient())
+            try
             {
-                var response = await client.GetAsync(MovieInfoEndpoint + "api/Movie?movieTitle=" + movieTitle);
-                response.EnsureSuccessStatusCode();
-                resultString = await response.Content.ReadAsStringAsync();
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetAsync(MovieInfoEndpoint + "api/Movie?movieTitle=" + movieTitle);
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsAsync<MovieAggregatedContentDTO>();
+                }
             }
-
-            return null;
+            catch
+            {
+                return null;
+            }            
         }
     }
 }

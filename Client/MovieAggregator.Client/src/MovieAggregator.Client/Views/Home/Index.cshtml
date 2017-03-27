@@ -1,8 +1,26 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model MovieAggregator.Client.ViewModels.HomeViewModel
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>MovieAggregator Client</title>
 </head>
 <body>
-    <h1>@Model</h1>
+
+    @using (Html.BeginForm())
+    { 
+        <div>
+            @Html.LabelFor(m => m.SearchQuery)
+            @Html.TextBoxFor(m => m.SearchQuery)
+        </div>
+        <div>
+            <input type="submit" value="search" />
+        </div>
+    }
+
+    @if (Model.MovieInfo != null)
+    {
+        <h1>@Model.MovieInfo.Info.Title (@Model.MovieInfo.Info.Year)</h1>
+        <a href="@Model.MovieInfo.Trailer.VideoURL">@Model.MovieInfo.Trailer.VideoTitle</a>
+    }
 </body>
 </html>
