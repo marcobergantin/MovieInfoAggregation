@@ -5,7 +5,7 @@ using MovieAggregator.DTOs;
 
 namespace MovieAggregator.WebApi.Services
 {
-    public class InMemoryMovieCache : IMovieCache
+    public class InMemoryMovieCache : IMovieCacheService
     {
         private const int CacheInitialSize = 32;
         Dictionary<string, MovieAggregatedContentDTO> _cache;
@@ -31,6 +31,11 @@ namespace MovieAggregator.WebApi.Services
             }
 
             return null;
+        }
+
+        public void SetExpirationInterval(uint seconds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

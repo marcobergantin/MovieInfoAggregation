@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMovieCache.cs" />
+    <Compile Include="IMovieCacheEntityFactory.cs" />
+    <Compile Include="IMovieCacheEntry.cs" />
+    <Compile Include="IMovieCacheService.cs" />
     <Compile Include="IMovieInfoAggregator.cs" />
     <Compile Include="IMovieInfoProvider.cs" />
+    <Compile Include="IMovieCacheRepository.cs" />
     <Compile Include="ITrailerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

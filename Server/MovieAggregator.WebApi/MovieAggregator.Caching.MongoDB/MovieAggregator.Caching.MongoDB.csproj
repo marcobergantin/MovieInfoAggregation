@@ -56,8 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\MovieCacheEntry.cs" />
-    <Compile Include="MongoDBMovieCache.cs" />
+    <Compile Include="Entities\MongoDBMovieCacheEntry.cs" />
+    <Compile Include="MongoDBMovieCacheRepository.cs" />
+    <Compile Include="MongoDBMovieCacheFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,11 +8,11 @@ namespace MovieAggregator.WebApi.Services
     {
         ITrailerProvider _trailerProvider;
         IMovieInfoProvider _infoProvider;
-        IMovieCache _cache;
+        IMovieCacheService _cache;
 
         public MovieAggregatorService(IMovieInfoProvider infoProvider, 
             ITrailerProvider trailerProvider,
-            IMovieCache cache)
+            IMovieCacheService cache)
         {
             _infoProvider = infoProvider;
             _trailerProvider = trailerProvider;
