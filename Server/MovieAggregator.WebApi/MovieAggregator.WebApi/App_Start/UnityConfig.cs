@@ -1,4 +1,5 @@
 using Microsoft.Practices.Unity;
+using MovieAggregator.Caching.MongoDB;
 using MovieAggregator.Contracts;
 using MovieAggregator.WebApi.Services;
 using MovieInfoProvider.OMDb.ApiInteraction;
@@ -16,7 +17,7 @@ namespace MovieAggregator.WebApi
 
             container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
-            container.RegisterType<IMovieCache, InMemoryMovieCache>();
+            container.RegisterType<IMovieCache, MongoDBMovieCache>();
 
             //singleton
             container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>(new ContainerControlledLifetimeManager());

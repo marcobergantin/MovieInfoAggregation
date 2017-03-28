@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieInfoProvider.OMDb.ApiI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAggregator.DTOs", "MovieAggregator.DTOs\MovieAggregator.DTOs.csproj", "{5EE1FF65-F701-4BBB-A7C6-0D290F09BADA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAggregator.Caching.MongoDB", "MovieAggregator.Caching.MongoDB\MovieAggregator.Caching.MongoDB.csproj", "{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5EE1FF65-F701-4BBB-A7C6-0D290F09BADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EE1FF65-F701-4BBB-A7C6-0D290F09BADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EE1FF65-F701-4BBB-A7C6-0D290F09BADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
