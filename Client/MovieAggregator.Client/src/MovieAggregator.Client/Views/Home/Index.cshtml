@@ -1,26 +1,22 @@
-﻿@model MovieAggregator.Client.ViewModels.HomeViewModel
+﻿@model HomeViewModel
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>MovieAggregator Client</title>
-</head>
-<body>
+@{
+    ViewBag.Title = "MovieAggregator Client";
+}
 
-    @using (Html.BeginForm())
-    { 
+<div>
+    <form method="post">
         <div>
-            @Html.LabelFor(m => m.SearchQuery)
-            @Html.TextBoxFor(m => m.SearchQuery)
+            <label asp-for="SearchQuery"></label>
+            <input asp-for="SearchQuery" />
         </div>
         <div>
             <input type="submit" value="search" />
         </div>
-    }
+    </form>
+</div>
 
-    @if (Model.MovieInfo != null)
-    {
-        <h1>@Model.MovieInfo.Info.Title (@Model.MovieInfo.Info.Year)</h1>
-        <a href="@Model.MovieInfo.Trailer.VideoURL">@Model.MovieInfo.Trailer.VideoTitle</a>
-    }
-</body>
-</html>
+@if (Model.MovieInfo != null)
+{
+    @Html.Partial("_MovieDetails", Model.MovieInfo)
+}

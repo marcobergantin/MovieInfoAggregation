@@ -14,7 +14,7 @@ namespace VideoProvider.Youtube.ApiInteraction
 
         public async Task<MovieTrailerDTO> GetTrailer(string movieTitle)
         {
-            return await SearchVideo(movieTitle + " trailer");
+            return await SearchVideo(movieTitle + " movie trailer");
         }
 
         public async Task<MovieTrailerDTO> SearchVideo(string searchQuery)
