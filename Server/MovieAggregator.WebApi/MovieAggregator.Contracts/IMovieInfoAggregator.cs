@@ -5,6 +5,6 @@ namespace MovieAggregator.Contracts
 {
     public interface IMovieInfoAggregator
     {
-        Task<MovieAggregatedContentDTO> GetAggregatedInfo(string movieTitle);
+        Task<MovieAggregatedContentDTO> GetAggregatedInfo(string searchString);
     }
 }

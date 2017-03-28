@@ -8,22 +8,34 @@ namespace MovieAggregator.WebApi.Services
     {
         ITrailerProvider _trailerProvider;
         IMovieInfoProvider _infoProvider;
+        IMovieCache _cache;
 
-        public MovieAggregatorService(IMovieInfoProvider infoProvider, ITrailerProvider trailerProvider)
+        public MovieAggregatorService(IMovieInfoProvider infoProvider, 
+            ITrailerProvider trailerProvider,
+            IMovieCache cache)
         {
             _infoProvider = infoProvider;
             _trailerProvider = trailerProvider;
+            _cache = cache;
         }
 
-        public async Task<MovieAggregatedContentDTO> GetAggregatedInfo(string movieTitle)
+        public async Task<MovieAggregatedContentDTO> GetAggregatedInfo(string searchString)
         {
-            var info = await _infoProvider.GetInfo(movieTitle);
+            var cachedObj = _cache.GetFromCache(searchString);
+            if (cachedObj != null)
+            {
+                return cachedObj;
+            }
 
-            return new MovieAggregatedContentDTO()
+            var info = await _infoProvider.GetInfo(searchString);
+            var result = new MovieAggregatedContentDTO()
             {
                 Info = info,
                 Trailer = await _trailerProvider.GetTrailer(info.Title)
             };
+
+            _cache.AddToCache(searchString, result);
+            return result;
         }
     }
 }

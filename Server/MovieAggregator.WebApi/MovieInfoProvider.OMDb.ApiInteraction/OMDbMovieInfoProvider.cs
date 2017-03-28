@@ -10,13 +10,15 @@ namespace MovieInfoProvider.OMDb.ApiInteraction
     {
         private const string BaseUrl = "http://www.omdbapi.com/";
         private const string TitleParamUrlKey = "t";
+        private const string TypeParamKey = "type";
+        private const string DefaultTypeValue = "movie";
 
         public async Task<MovieInfoDTO> GetInfo(string movieTitle)
         {
             using (HttpClient client = new HttpClient())
             {
                 string urlEncodedMovieTitle = Uri.EscapeUriString(movieTitle);
-                string requestUri = $"{BaseUrl}?{TitleParamUrlKey}={urlEncodedMovieTitle}";
+                string requestUri = $"{BaseUrl}?{TitleParamUrlKey}={urlEncodedMovieTitle}&{TypeParamKey}={DefaultTypeValue}";
                 HttpResponseMessage response = await client.GetAsync(requestUri);
                 if (response.IsSuccessStatusCode)
                 {

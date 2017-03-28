@@ -5,6 +5,6 @@ namespace MovieAggregator.Contracts
 {
     public interface ITrailerProvider
     {
-        Task<MovieTrailerDTO> GetTrailer(string movieTitle);
+        Task<MovieTrailerDTO> GetTrailer(string searchString);
     }
 }

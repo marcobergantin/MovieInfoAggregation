@@ -16,7 +16,10 @@ namespace MovieAggregator.WebApi
 
             container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
-            container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>();
+            container.RegisterType<IMovieCache, InMemoryMovieCache>();
+
+            //singleton
+            container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>(new ContainerControlledLifetimeManager());
 
             config.DependencyResolver = new UnityDependencyResolver(container);
         }
