@@ -26,7 +26,6 @@ namespace MovieInfoProvider.OMDb.ApiInteraction
                 }
             }
 
-
             return null;
         }
     }

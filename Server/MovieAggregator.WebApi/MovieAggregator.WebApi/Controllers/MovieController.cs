@@ -15,7 +15,13 @@ namespace MovieAggregator.WebApi.Controllers
 
         public async Task<IHttpActionResult> Get(string movieTitle)
         {
-            return Ok(await _movieService.GetAggregatedInfo(movieTitle));
+            var data = await _movieService.GetAggregatedInfo(movieTitle);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+
+            return NotFound();
         }
     }
 }

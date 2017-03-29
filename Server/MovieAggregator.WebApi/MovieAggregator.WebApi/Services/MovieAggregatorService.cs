@@ -1,5 +1,6 @@
 ﻿using MovieAggregator.Contracts;
 using MovieAggregator.DTOs;
+using System;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.WebApi.Services
@@ -28,10 +29,15 @@ namespace MovieAggregator.WebApi.Services
             }
 
             var info = await _infoProvider.GetInfo(searchString);
+            if (info == null || string.IsNullOrEmpty(info.Title))
+            {
+                return null;
+            }
+
             var result = new MovieAggregatedContentDTO()
             {
                 Info = info,
-                Trailer = await _trailerProvider.GetTrailer(info.Title)
+                Trailer = await _trailerProvider.GetTrailer(info.Title, DateTime.Parse(info.Released))
             };
 
             _cache.AddToCache(searchString, result);
