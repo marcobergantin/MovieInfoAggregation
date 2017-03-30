@@ -1,0 +1,10 @@
+{
+	"version": "1.0.0",
+	"name": "movieaggregatorclient",
+	"private": true,
+  "devDependencies": {
+  },
+  "dependencies": {
+    "bootstrap": "3.3.7"
+  }
+}

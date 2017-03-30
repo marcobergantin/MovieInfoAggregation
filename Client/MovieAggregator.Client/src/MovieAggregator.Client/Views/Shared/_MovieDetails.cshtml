@@ -1,7 +1,21 @@
 ﻿@model MovieAggregatedContentDTO
 
-<h3>@Model.Info.Title (@Model.Info.Year)</h3>
-<img src="@Url.Content(Model.Info.Poster)" style="width:150px;height:250px"/>
-<iframe 
-        src="@Model.Trailer.EmbedURL" 
-        width="560" height="315" frameborder="0" allowfullscreen></iframe>
+<section class="panel panel-default">
+
+    <h3 class="panel-heading">@Model.Info.Title (@Model.Info.Year)</h3>
+
+    <div class="panel-body">
+
+        <img src="@Url.Content(Model.Info.Poster)" style="width:150px;height:250px" />
+
+        @Model.Info.Plot
+
+        <iframe src="@Model.Trailer.EmbedURL"
+                width="560"
+                height="315"
+                frameborder="0"
+                allowfullscreen></iframe>
+
+    </div>
+
+</section>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using MovieAggregator.Client.Interfaces;
 using MovieAggregator.Client.Services;
+using MovieAggregator.Client.Extensions;
 
 namespace MovieAggregator.Client
 {
@@ -38,7 +39,7 @@ namespace MovieAggregator.Client
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseNodeModules(env.ContentRootPath);
             app.UseMvcWithDefaultRoute();
         }
     }
