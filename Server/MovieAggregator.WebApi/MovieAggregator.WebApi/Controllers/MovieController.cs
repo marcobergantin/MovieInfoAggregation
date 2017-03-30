@@ -1,4 +1,5 @@
 ﻿using MovieAggregator.Contracts;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -15,13 +16,23 @@ namespace MovieAggregator.WebApi.Controllers
 
         public async Task<IHttpActionResult> Get(string movieTitle)
         {
-            var data = await _movieService.GetAggregatedInfo(movieTitle);
-            if (data != null)
-            {
-                return Ok(data);
-            }
+            if (string.IsNullOrWhiteSpace(movieTitle))
+                return BadRequest();
 
-            return NotFound();
+            try
+            {
+                var data = await _movieService.GetAggregatedInfo(movieTitle);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
