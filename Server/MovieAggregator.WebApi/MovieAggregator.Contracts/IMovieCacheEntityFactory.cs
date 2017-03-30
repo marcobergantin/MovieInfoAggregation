@@ -4,6 +4,6 @@ namespace MovieAggregator.Contracts
 {
     public interface IMovieCacheEntityFactory
     {
-        IMovieCacheEntry CreateEntry(MovieAggregatedContentDTO data);
+        IMovieCacheEntry CreateEntry(string searchString, MovieAggregatedContentDTO data);
     }
 }

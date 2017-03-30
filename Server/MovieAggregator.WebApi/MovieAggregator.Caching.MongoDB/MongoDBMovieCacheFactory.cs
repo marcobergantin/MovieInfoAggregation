@@ -11,12 +11,12 @@ namespace MovieAggregator.Caching.MongoDB
 {
     public class MongoDBMovieCacheFactory : IMovieCacheEntityFactory
     {
-        public IMovieCacheEntry CreateEntry(MovieAggregatedContentDTO data)
+        public IMovieCacheEntry CreateEntry(string searchString, MovieAggregatedContentDTO data)
         {
-            if (data == null)
+            if (string.IsNullOrWhiteSpace(searchString) || data == null)
                 return null;
 
-            return new MongoDBMovieCacheEntry(data);
+            return new MongoDBMovieCacheEntry(searchString, data);
         }
     }
 }

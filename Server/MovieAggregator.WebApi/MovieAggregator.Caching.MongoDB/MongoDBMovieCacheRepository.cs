@@ -1,9 +1,7 @@
 ﻿using MongoDB.Driver;
 using MovieAggregator.Caching.MongoDB.Entities;
 using MovieAggregator.Contracts;
-using MovieAggregator.DTOs;
-using System.Linq;
-using System;
+using System.Threading.Tasks;
 
 namespace MovieAggregator.Caching.MongoDB
 {
@@ -27,24 +25,26 @@ namespace MovieAggregator.Caching.MongoDB
             _cacheCollection = _database.GetCollection<IMovieCacheEntry>(CollectionName);
         }
 
-        public void Add(string searchString, IMovieCacheEntry content)
+        public Task Add(string searchString, IMovieCacheEntry content)
         {
             if (content == null)
-                return;
+                return null;
 
-            _cacheCollection.InsertOne(_entityFactory.CreateEntry(content.Data));
+            return _cacheCollection.InsertOneAsync(_entityFactory.CreateEntry(searchString, content.Data));
         }
 
-        public IMovieCacheEntry Get(string searchString)
+        public async Task<IMovieCacheEntry> Get(string searchString)
         {
-            return _cacheCollection.AsQueryable().FirstOrDefault(c => 
-                (c as MongoDBMovieCacheEntry).Data.Info.Title == searchString);
+            var cursor = await _cacheCollection.FindAsync(c =>
+                (c as MongoDBMovieCacheEntry).SeachString == searchString);
+
+            return await cursor.FirstOrDefaultAsync();
         }
 
-        public void Remove(IMovieCacheEntry content)
+        public Task Remove(string seachString)
         {
-            _cacheCollection.DeleteOne(c => 
-                (c as MongoDBMovieCacheEntry).Data.Info.Title == content.Data.Info.Title);
+            return _cacheCollection.DeleteOneAsync(c =>
+                (c as MongoDBMovieCacheEntry).SeachString == seachString);
         }
     }
 }

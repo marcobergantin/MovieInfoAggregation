@@ -1,9 +1,11 @@
-﻿namespace MovieAggregator.Contracts
+﻿using System.Threading.Tasks;
+
+namespace MovieAggregator.Contracts
 {
     public interface IMovieCacheRepository
     {
-        void Add(string searchString, IMovieCacheEntry content);
-        IMovieCacheEntry Get(string searchString);
-        void Remove(IMovieCacheEntry content);
+        Task Add(string searchString, IMovieCacheEntry content);
+        Task<IMovieCacheEntry> Get(string searchString);
+        Task Remove(string searchString);
     }
 }

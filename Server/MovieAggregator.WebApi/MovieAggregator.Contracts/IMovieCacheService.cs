@@ -1,11 +1,12 @@
 ﻿using MovieAggregator.DTOs;
+using System.Threading.Tasks;
 
 namespace MovieAggregator.Contracts
 {
     public interface IMovieCacheService
     {
-        void AddToCache(string searchString, MovieAggregatedContentDTO content);
-        MovieAggregatedContentDTO GetFromCache(string searchString);
+        Task AddToCache(string searchString, MovieAggregatedContentDTO content);
+        Task<MovieAggregatedContentDTO> GetFromCache(string searchString);
         void SetExpirationInterval(uint seconds);
     }
 }

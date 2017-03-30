@@ -12,10 +12,12 @@ namespace MovieAggregator.Caching.MongoDB.Entities
         public ObjectId _id { get; set; }
         public MovieAggregatedContentDTO Data { get; set; }
         public DateTime TimeStamp { get; set; }
+        public string SeachString { get; set; }
 
-        public MongoDBMovieCacheEntry(MovieAggregatedContentDTO data)
+        public MongoDBMovieCacheEntry(string searchString, MovieAggregatedContentDTO data)
         {
             _id = ObjectId.GenerateNewId();
+            SeachString = searchString;
             Data = data;
             TimeStamp = DateTime.UtcNow;
         }

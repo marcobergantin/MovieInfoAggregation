@@ -22,7 +22,7 @@ namespace MovieAggregator.WebApi.Services
 
         public async Task<MovieAggregatedContentDTO> GetAggregatedInfo(string searchString)
         {
-            var cachedObj = _cache.GetFromCache(searchString);
+            var cachedObj = await _cache.GetFromCache(searchString);
             if (cachedObj != null)
             {
                 return cachedObj;
@@ -34,13 +34,20 @@ namespace MovieAggregator.WebApi.Services
                 return null;
             }
 
+            DateTime releasedDate;
+            DateTime? releasedDateParam = null;
+            if (DateTime.TryParse(info.Released, out releasedDate))
+            {
+                releasedDateParam = releasedDate;
+            }
+
             var result = new MovieAggregatedContentDTO()
             {
                 Info = info,
-                Trailer = await _trailerProvider.GetTrailer(info.Title, DateTime.Parse(info.Released))
+                Trailer = await _trailerProvider.GetTrailer(info.Title, releasedDateParam)
             };
 
-            _cache.AddToCache(searchString, result);
+            await _cache.AddToCache(searchString, result);
             return result;
         }
     }

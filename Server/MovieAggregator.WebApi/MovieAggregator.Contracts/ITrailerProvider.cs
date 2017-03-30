@@ -6,6 +6,6 @@ namespace MovieAggregator.Contracts
 {
     public interface ITrailerProvider
     {
-        Task<MovieTrailerDTO> GetTrailer(string searchString, DateTime releaseDate);
+        Task<MovieTrailerDTO> GetTrailer(string searchString, DateTime? releaseDate);
     }
 }

@@ -15,16 +15,16 @@ namespace VideoProvider.Youtube.ApiInteraction
         private static readonly string ClientSecret = ConfigurationManager.AppSettings["GoogleApisClientSecret"];
         private static YouTubeService youtubeService;
 
-        public async Task<MovieTrailerDTO> GetTrailer(string movieTitle, DateTime releaseDate)
+        public async Task<MovieTrailerDTO> GetTrailer(string movieTitle, DateTime? releaseDate)
         {
             //let's include all the movies from the beginning of cinema to unreleased with a 5 year scope
-            if (releaseDate.Year < 1890 || releaseDate > DateTime.Now.AddYears(5))
+            if (releaseDate.HasValue && (releaseDate.Value.Year < 1890 || releaseDate.Value > DateTime.Now.AddYears(5)))
                 throw new ArgumentException("ReleaseDate is not valid");
 
-            return await SearchVideo(movieTitle + " trailer " + releaseDate.Year, releaseDate);
+            return await SearchVideo(movieTitle + " official trailer " + (releaseDate.HasValue ? releaseDate.Value.Year.ToString() : ""), releaseDate);
         }
 
-        public async Task<MovieTrailerDTO> SearchVideo(string searchQuery, DateTime releaseDate)
+        public async Task<MovieTrailerDTO> SearchVideo(string searchQuery, DateTime? releaseDate)
         {
             if (youtubeService == null)
             {
@@ -54,7 +54,7 @@ namespace VideoProvider.Youtube.ApiInteraction
             return null;
         }
 
-        private SearchResource.ListRequest BuildRequest(string searchString, DateTime releaseDate)
+        private SearchResource.ListRequest BuildRequest(string searchString, DateTime? releaseDate)
         {
             var searchListRequest = youtubeService.Search.List("snippet");
             searchListRequest.Q = searchString;
@@ -67,7 +67,10 @@ namespace VideoProvider.Youtube.ApiInteraction
             //trailers usually come out in the year prior the release of the movie
             //no upper bound, a post-release trailer is still good (old movies for example, 
             //also youtube started in 2005)
-            searchListRequest.PublishedAfter = releaseDate.Subtract(new TimeSpan(365, 0, 0, 0));
+            if (releaseDate.HasValue)
+            {
+                searchListRequest.PublishedAfter = releaseDate.Value.Subtract(new TimeSpan(365, 0, 0, 0));
+            }
             return searchListRequest;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using MovieAggregator.Contracts;
 using System;
 using MovieAggregator.DTOs;
+using System.Threading.Tasks;
 
 namespace MovieAggregator.WebApi.Services
 {
@@ -19,14 +20,14 @@ namespace MovieAggregator.WebApi.Services
             _expirationInterval = TimeSpan.FromSeconds(DefaultExpirationInterval);
         }
 
-        public void AddToCache(string searchString, MovieAggregatedContentDTO content)
+        public Task AddToCache(string searchString, MovieAggregatedContentDTO content)
         {
-            _cacheRepository.Add(searchString, _entityFactory.CreateEntry(content));
+            return _cacheRepository.Add(searchString, _entityFactory.CreateEntry(searchString, content));
         }
 
-        public MovieAggregatedContentDTO GetFromCache(string searchString)
+        public async Task<MovieAggregatedContentDTO> GetFromCache(string searchString)
         {
-            var cachedObj = _cacheRepository.Get(searchString);
+            var cachedObj = await _cacheRepository.Get(searchString);
             if (cachedObj == null)
             {
                 return null;
@@ -34,7 +35,7 @@ namespace MovieAggregator.WebApi.Services
 
             if ((DateTime.UtcNow - cachedObj.TimeStamp) > _expirationInterval)
             {
-                _cacheRepository.Remove(cachedObj);
+                await _cacheRepository.Remove(searchString);
                 return null;
             }
 
