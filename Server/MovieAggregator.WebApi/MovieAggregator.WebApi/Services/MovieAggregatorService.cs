@@ -33,22 +33,33 @@ namespace MovieAggregator.WebApi.Services
             {
                 return null;
             }
-
-            DateTime releasedDate;
-            DateTime? releasedDateParam = null;
-            if (DateTime.TryParse(info.Released, out releasedDate))
-            {
-                releasedDateParam = releasedDate;
-            }
-
+            
             var result = new MovieAggregatedContentDTO()
             {
                 Info = info,
-                Trailer = await _trailerProvider.GetTrailer(info.Title, releasedDateParam)
+                Trailer = await _trailerProvider.GetTrailer(info.Title, 
+                                                    GetReleasedDateParameter(info))
             };
 
             await _cache.AddToCache(searchString, result);
             return result;
+        }
+
+        private DateTime? GetReleasedDateParameter(MovieInfoDTO info)
+        {
+            DateTime releasedDate;
+            if (DateTime.TryParse(info.Released, out releasedDate))
+            {
+                return releasedDate;
+            }
+
+            int year;
+            if (int.TryParse(info.Year, out year))
+            {
+                return new DateTime(year, 6, 15);
+            }
+
+            return null;
         }
     }
 }
