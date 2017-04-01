@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using MovieAggregator.WebApi.App_Start;
+using System.Web.Http;
 
 namespace MovieAggregator.WebApi
 {
@@ -7,7 +8,7 @@ namespace MovieAggregator.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            UnityConfig.RegisterComponents(config);
+            UnityConfig.RegisterComponents(config, CacheConfig.GetConfigurableCache());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

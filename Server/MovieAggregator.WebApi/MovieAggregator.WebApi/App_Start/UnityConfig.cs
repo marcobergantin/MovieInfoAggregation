@@ -13,7 +13,7 @@ namespace MovieAggregator.WebApi
 {
     public static class UnityConfig
     {
-        public static void RegisterComponents(HttpConfiguration config)
+        public static void RegisterComponents(HttpConfiguration config, CacheType cacheType)
         {
 			var container = new UnityContainer();
 
