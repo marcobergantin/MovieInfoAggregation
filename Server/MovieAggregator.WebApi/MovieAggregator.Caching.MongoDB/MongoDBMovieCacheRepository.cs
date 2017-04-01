@@ -14,23 +14,19 @@ namespace MovieAggregator.Caching.MongoDB
         static IMongoDatabase _database;
         static IMongoCollection<IMovieCacheEntry> _cacheCollection;
 
-        IMovieCacheEntityFactory _entityFactory;
-
         public MongoDBMovieCacheRepository()
         {
-            _entityFactory = new MongoDBMovieCacheFactory();
-
             _client = new MongoClient();
             _database = _client.GetDatabase(DatabaseName);
             _cacheCollection = _database.GetCollection<IMovieCacheEntry>(CollectionName);
         }
 
-        public Task Add(string searchString, IMovieCacheEntry content)
+        public Task Add(string searchString, IMovieCacheEntry entity)
         {
-            if (content == null)
+            if (entity == null)
                 return null;
 
-            return _cacheCollection.InsertOneAsync(_entityFactory.CreateEntry(searchString, content.Data));
+            return _cacheCollection.InsertOneAsync(entity);
         }
 
         public async Task<IMovieCacheEntry> Get(string searchString)
