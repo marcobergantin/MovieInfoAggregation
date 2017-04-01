@@ -150,6 +150,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MovieAggregator.Caching.Common\MovieAggregator.Caching.Common.csproj">
+      <Project>{1A393528-50F4-4DFA-9CE8-37B0C6C9D197}</Project>
+      <Name>MovieAggregator.Caching.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieAggregator.Caching.MongoDB\MovieAggregator.Caching.MongoDB.csproj">
       <Project>{A7DE29B4-9824-4FFB-8CD7-087B9408E36F}</Project>
       <Name>MovieAggregator.Caching.MongoDB</Name>

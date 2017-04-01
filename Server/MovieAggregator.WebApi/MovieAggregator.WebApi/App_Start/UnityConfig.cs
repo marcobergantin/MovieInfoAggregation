@@ -19,8 +19,8 @@ namespace MovieAggregator.WebApi
 
             container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
-            //SetupMongoDBCache(container);
-            SetupInMemoryCache(container);
+            SetupMongoDBCache(container);
+            //SetupInMemoryCache(container);
             container.RegisterType<IMovieCacheService, MovieCacheService>();
 
             //singleton
