@@ -20,5 +20,10 @@ namespace MovieAggregator.Client.ViewModels
         {
             return MovieInfo != null && MovieInfo.Entries != null && MovieInfo.Entries.Count() > 0;
         }
+
+        public bool CanShowPages()
+        {
+            return HasEntries() && MovieInfo.PageIndex >= 0 && MovieInfo.NumberOfPages > 0;
+        }
     }
 }
