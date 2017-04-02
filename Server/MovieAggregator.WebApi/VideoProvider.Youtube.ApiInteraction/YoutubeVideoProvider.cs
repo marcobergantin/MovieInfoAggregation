@@ -38,7 +38,6 @@ namespace VideoProvider.Youtube.ApiInteraction
 
         public async Task<MovieTrailerDTO> GetTrailer(string movieTitle, DateTime? releaseDate)
         {
-            //let's include all the movies from the beginning of cinema to unreleased with a 5 year scope
             if (ValidateReleaseDate(releaseDate) == false)
                 throw new ArgumentException("ReleaseDate is not valid");
 
@@ -48,7 +47,8 @@ namespace VideoProvider.Youtube.ApiInteraction
         private bool ValidateReleaseDate(DateTime? releaseDate)
         {
             //let's include all the movies from the beginning of cinema to unreleased with a 5 year scope
-            return (releaseDate.HasValue && (releaseDate.Value.Year < 1890 || releaseDate.Value > DateTime.Now.AddYears(5)));
+            return releaseDate.HasValue == false ||
+                (releaseDate.HasValue && (releaseDate.Value.Year > 1890 || releaseDate.Value < DateTime.Now.AddYears(5)));
         }
 
         public async Task<MovieTrailerDTO> SearchVideo(string searchQuery, DateTime? releaseDate)

@@ -15,18 +15,32 @@ namespace MovieAggregator.WebApi
     {
         public static void RegisterComponents(HttpConfiguration config, CacheType cacheType)
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
+
+            SetupCache(container, cacheType);
 
             container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
-            SetupMongoDBCache(container);
-            //SetupInMemoryCache(container);
             container.RegisterType<IMovieCacheService, MovieCacheService>();
 
             //singleton
             container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>(new ContainerControlledLifetimeManager());
 
             config.DependencyResolver = new UnityDependencyResolver(container);
+        }
+
+        private static void SetupCache(IUnityContainer container, CacheType cacheType)
+        {
+            switch (cacheType)
+            {
+                case CacheType.MongoDB:
+                    SetupMongoDBCache(container);
+                    break;
+
+                default:
+                    SetupInMemoryCache(container);
+                    break;
+            }
         }
 
         private static void SetupMongoDBCache(IUnityContainer container)
