@@ -73,7 +73,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SearchResultExtensions.cs" />
+    <Compile Include="Helpers\YoutubeRequestHelper.cs" />
+    <Compile Include="Helpers\YoutubeSearchResultsHelper.cs" />
+    <Compile Include="Helpers\YoutubeServiceHelper.cs" />
+    <Compile Include="Extensions\SearchResultExtensions.cs" />
     <Compile Include="YoutubeVideoProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

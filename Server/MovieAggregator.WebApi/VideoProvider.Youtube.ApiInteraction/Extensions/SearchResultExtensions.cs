@@ -1,7 +1,7 @@
 ﻿using Google.Apis.YouTube.v3.Data;
 using System;
 
-namespace VideoProvider.Youtube.ApiInteraction
+namespace VideoProvider.Youtube.ApiInteraction.Extensions
 {
     public static class SearchResultExtensions
     {
