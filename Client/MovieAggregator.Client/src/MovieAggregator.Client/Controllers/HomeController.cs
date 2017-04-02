@@ -24,7 +24,7 @@ namespace MovieAggregator.Client.Controllers
         public async Task<IActionResult> Index(HomeViewModel inputViewModel)
         {
             var movieInfo = await _movieService.GetMovieInfo(inputViewModel.SearchQuery);
-            inputViewModel.MovieInfo = movieInfo;
+            inputViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
             return View("Index", inputViewModel);
         }
     }

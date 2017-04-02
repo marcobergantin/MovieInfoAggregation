@@ -24,18 +24,5 @@ namespace MovieAggregator.Client.DTOs
         public string imdbID { get; set; }
         public string Type { get; set; }
         public string Response { get; set; }
-
-        public string GetReleaseYear()
-        {
-            if (Released.HasValue)
-                return Released.Value.Year.ToString();
-
-            if (string.IsNullOrWhiteSpace(Year) == false)
-            {
-                return Year;
-            }
-
-            return string.Empty;
-        }
     }
 }
