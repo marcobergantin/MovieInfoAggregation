@@ -68,6 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\TMDbClientHelper.cs" />
+    <Compile Include="Helpers\TMDbImageHelper.cs" />
     <Compile Include="TMDbMovieInfoProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

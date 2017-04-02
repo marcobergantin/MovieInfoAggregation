@@ -1,9 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MovieAggregator.Caching.Common;
-using MovieAggregator.Contracts;
 using MovieAggregator.DTOs;
-using System;
 
 namespace MovieAggregator.Caching.MongoDB.Entities
 {
