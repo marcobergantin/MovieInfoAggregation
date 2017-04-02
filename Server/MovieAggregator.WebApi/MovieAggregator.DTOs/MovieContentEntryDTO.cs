@@ -1,6 +1,6 @@
-﻿namespace MovieAggregator.Client.DTOs
+﻿namespace MovieAggregator.DTOs
 {
-    public class MovieAggregatedContentDTO
+    public class MovieContentEntryDTO
     {
         public MovieInfoDTO Info { get; set; }
         public MovieTrailerDTO Trailer { get; set; }

@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MovieAggregatedContentDTO.cs" />
+    <Compile Include="MovieContentEntryDTO.cs" />
+    <Compile Include="MovieContentDTO.cs" />
     <Compile Include="MovieInfoDTO.cs" />
     <Compile Include="MovieTrailerDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

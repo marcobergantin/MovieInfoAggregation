@@ -1,11 +1,13 @@
-﻿namespace MovieAggregator.Client.DTOs
+﻿using System;
+
+namespace MovieAggregator.Client.DTOs
 {
     public class MovieInfoDTO
     {
         public string Title { get; set; }
         public string Year { get; set; }
         public string Rated { get; set; }
-        public string Released { get; set; }
+        public DateTime? Released { get; set; }
         public string Runtime { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }
@@ -22,5 +24,18 @@
         public string imdbID { get; set; }
         public string Type { get; set; }
         public string Response { get; set; }
+
+        public string GetReleaseYear()
+        {
+            if (Released.HasValue)
+                return Released.Value.Year.ToString();
+
+            if (string.IsNullOrWhiteSpace(Year) == false)
+            {
+                return Year;
+            }
+
+            return string.Empty;
+        }
     }
 }

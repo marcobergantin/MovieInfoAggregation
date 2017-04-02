@@ -20,12 +20,12 @@ namespace MovieAggregator.WebApi.Services
             _expirationInterval = TimeSpan.FromSeconds(DefaultExpirationInterval);
         }
 
-        public Task AddToCache(string searchString, MovieAggregatedContentDTO content)
+        public Task AddToCache(string searchString, MovieContentDTO content)
         {
             return _cacheRepository.Add(searchString, _entityFactory.CreateEntry(searchString, content));
         }
 
-        public async Task<MovieAggregatedContentDTO> GetFromCache(string searchString)
+        public async Task<MovieContentDTO> GetFromCache(string searchString)
         {
             var cachedObj = await _cacheRepository.Get(searchString);
             if (cachedObj == null)

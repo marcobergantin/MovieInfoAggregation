@@ -2,9 +2,10 @@ using Microsoft.Practices.Unity;
 using MovieAggregator.Caching.MongoDB;
 using MovieAggregator.Caching.MongoDB.Entities;
 using MovieAggregator.Contracts;
+using MovieAggregator.TMDb.ApiInteraction;
 using MovieAggregator.WebApi.Cache;
 using MovieAggregator.WebApi.Services;
-using MovieInfoProvider.OMDb.ApiInteraction;
+//using MovieInfoProvider.OMDb.ApiInteraction;
 using System.Web.Http;
 using Unity.WebApi;
 using VideoProvider.Youtube.ApiInteraction;
@@ -13,15 +14,15 @@ namespace MovieAggregator.WebApi
 {
     public static class UnityConfig
     {
-        public static void RegisterComponents(HttpConfiguration config, CacheType cacheType)
+        public static void RegisterComponents(HttpConfiguration config, CacheType cacheType, uint cacheExpirationInterval)
         {
             var container = new UnityContainer();
 
-            SetupCache(container, cacheType);
-
-            container.RegisterType<IMovieInfoProvider, OMDbMovieInfoProvider>();
+            container.RegisterType<IMovieInfoProvider, TMDbMovieInfoProvider>();
             container.RegisterType<ITrailerProvider, YoutubeVideoProvider>();
             container.RegisterType<IMovieCacheService, MovieCacheService>();
+
+            SetupCache(container, cacheType, cacheExpirationInterval);
 
             //singleton
             container.RegisterType<IMovieInfoAggregator, MovieAggregatorService>(new ContainerControlledLifetimeManager());
@@ -29,7 +30,7 @@ namespace MovieAggregator.WebApi
             config.DependencyResolver = new UnityDependencyResolver(container);
         }
 
-        private static void SetupCache(IUnityContainer container, CacheType cacheType)
+        private static void SetupCache(IUnityContainer container, CacheType cacheType, uint cacheExpirationInterval)
         {
             switch (cacheType)
             {
@@ -40,6 +41,11 @@ namespace MovieAggregator.WebApi
                 default:
                     SetupInMemoryCache(container);
                     break;
+            }
+
+            if (cacheExpirationInterval > 0)
+            {
+                container.Resolve<IMovieCacheService>().SetExpirationInterval(cacheExpirationInterval);
             }
         }
 

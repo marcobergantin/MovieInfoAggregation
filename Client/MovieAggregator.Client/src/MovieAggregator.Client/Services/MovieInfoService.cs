@@ -18,7 +18,7 @@ namespace MovieAggregator.Client.Services
             }
         }
 
-        public async Task<MovieAggregatedContentDTO> GetMovieInfo(string movieTitle)
+        public async Task<MovieContentDTO> GetMovieInfo(string movieTitle)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace MovieAggregator.Client.Services
                 {
                     var response = await client.GetAsync(MovieInfoEndpoint + "api/Movie?movieTitle=" + movieTitle);
                     response.EnsureSuccessStatusCode();
-                    return await response.Content.ReadAsAsync<MovieAggregatedContentDTO>();
+                    return await response.Content.ReadAsAsync<MovieContentDTO>();
                 }
             }
             catch

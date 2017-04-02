@@ -1,12 +1,12 @@
-﻿@model MovieAggregatedContentDTO
+﻿@model MovieContentEntryDTO
 
 <section class="panel panel-default">
 
-    <table width="580" align="center">
+    <table width="600" align="center">
 
         <tr>
             <td colspan="2">
-                <h3 class="panel-heading">@Model.Info.Title (@Model.Info.Year)</h3>
+                <h3 class="panel-heading">@Model.Info.Title @Model.GetReleaseYearString()</h3>
             </td>
         </tr>
 
@@ -15,11 +15,14 @@
                 <img src="@Url.Content(Model.Info.Poster)" style="width:150px;height:250px" />
             </td>           
             <td>
-                <iframe src="@Model.Trailer.EmbedURL"
-                        width="444"
-                        height="250"
-                        frameborder="0"
-                        allowfullscreen></iframe>
+                @if (Model.HasTrailer())
+                {
+                    <iframe src="@Model.Trailer.EmbedURL"
+                            width="450"
+                            height="250"
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                }
             </td>
 
         </tr>

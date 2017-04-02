@@ -1,4 +1,5 @@
 ﻿using MovieAggregator.Client.DTOs;
+using System.Linq;
 
 namespace MovieAggregator.Client.ViewModels
 {
@@ -10,10 +11,15 @@ namespace MovieAggregator.Client.ViewModels
             set;
         }
 
-        public MovieAggregatedContentDTO MovieInfo
+        public MovieContentDTO MovieInfo
         {
             get;
             set;
+        }
+
+        public bool HasEntries()
+        {
+            return MovieInfo != null && MovieInfo.Entries != null && MovieInfo.Entries.Count() > 0;
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using MovieAggregator.DTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.Contracts
 {
     public interface IMovieInfoProvider
     {
-        Task<MovieInfoDTO> GetInfo(string searchString);
+        Task<IEnumerable<MovieInfoDTO>> GetInfo(string searchString);
     }
 }

@@ -8,7 +8,9 @@ namespace MovieAggregator.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            UnityConfig.RegisterComponents(config, CacheConfig.GetConfigurableCache());
+            UnityConfig.RegisterComponents(config, 
+                                           CacheConfig.GetConfigurableCacheType(), 
+                                           CacheConfig.GetConfigurableCacheExpirationInterval());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -1,6 +1,8 @@
 ﻿using MovieAggregator.Contracts;
 using MovieAggregator.DTOs;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.WebApi.Services
@@ -20,7 +22,7 @@ namespace MovieAggregator.WebApi.Services
             _cache = cache;
         }
 
-        public async Task<MovieAggregatedContentDTO> GetAggregatedInfo(string searchString)
+        public async Task<MovieContentDTO> GetAggregatedInfo(string searchString)
         {
             var cachedObj = await _cache.GetFromCache(searchString);
             if (cachedObj != null)
@@ -28,29 +30,38 @@ namespace MovieAggregator.WebApi.Services
                 return cachedObj;
             }
 
-            var info = await _infoProvider.GetInfo(searchString);
-            if (info == null || string.IsNullOrEmpty(info.Title))
+            var infoCollection = await _infoProvider.GetInfo(searchString);
+            if (infoCollection == null || infoCollection.Count() == 0)
             {
                 return null;
             }
-            
-            var result = new MovieAggregatedContentDTO()
+
+            List<MovieContentEntryDTO> results = new List<MovieContentEntryDTO>();
+            foreach (var entry in infoCollection)
             {
-                Info = info,
-                Trailer = await _trailerProvider.GetTrailer(info.Title, 
-                                                    GetReleasedDateParameter(info))
+                if (string.IsNullOrEmpty(entry.Title) == false)
+                {
+                    var dto = new MovieContentEntryDTO();
+                    dto.Info = entry;
+                    dto.Trailer = await _trailerProvider.GetTrailer(entry.Title, GetReleasedDateParameter(entry));
+                    results.Add(dto);
+                }
+            }
+
+            var returnObj = new MovieContentDTO()
+            {
+                Entries = results
             };
 
-            await _cache.AddToCache(searchString, result);
-            return result;
+            await _cache.AddToCache(searchString, returnObj);
+            return returnObj;
         }
 
         private DateTime? GetReleasedDateParameter(MovieInfoDTO info)
         {
-            DateTime releasedDate;
-            if (DateTime.TryParse(info.Released, out releasedDate))
+            if (info.Released.HasValue)
             {
-                return releasedDate;
+                return info.Released.Value;
             }
 
             int year;

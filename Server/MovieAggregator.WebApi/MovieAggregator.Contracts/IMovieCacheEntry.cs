@@ -6,7 +6,7 @@ namespace MovieAggregator.Contracts
     public interface IMovieCacheEntry
     {
         string SeachString { get; set; }
-        MovieAggregatedContentDTO Data { get; set; }
+        MovieContentDTO Data { get; set; }
         DateTime TimeStamp { get; set; }
     }
 }

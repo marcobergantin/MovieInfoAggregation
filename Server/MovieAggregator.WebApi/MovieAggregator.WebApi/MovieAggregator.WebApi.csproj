@@ -133,6 +133,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Cache\InMemoryCacheRepository.cs" />
     <Compile Include="Services\MovieAggregatorService.cs" />
@@ -167,6 +168,10 @@
     <ProjectReference Include="..\MovieAggregator.DTOs\MovieAggregator.DTOs.csproj">
       <Project>{5ee1ff65-f701-4bbb-a7c6-0d290f09bada}</Project>
       <Name>MovieAggregator.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieAggregator.TMDb.ApiInteraction\MovieAggregator.TMDb.ApiInteraction.csproj">
+      <Project>{13776DCA-284D-436C-9466-30638B4D7B66}</Project>
+      <Name>MovieAggregator.TMDb.ApiInteraction</Name>
     </ProjectReference>
     <ProjectReference Include="..\MovieInfoProvider.OMDb.ApiInteraction\MovieInfoProvider.OMDb.ApiInteraction.csproj">
       <Project>{e96f1ab0-55d7-4623-b1b7-2ae1ea79726e}</Project>

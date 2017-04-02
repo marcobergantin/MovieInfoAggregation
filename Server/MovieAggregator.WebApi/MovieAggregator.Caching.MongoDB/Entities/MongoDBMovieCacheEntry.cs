@@ -12,7 +12,7 @@ namespace MovieAggregator.Caching.MongoDB.Entities
         [BsonId]
         public ObjectId _id { get; set; }
 
-        public MongoDBMovieCacheEntry(string searchString, MovieAggregatedContentDTO data) :
+        public MongoDBMovieCacheEntry(string searchString, MovieContentDTO data) :
             base(searchString, data)
         {
             _id = ObjectId.GenerateNewId();

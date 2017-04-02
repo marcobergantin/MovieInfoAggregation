@@ -5,7 +5,7 @@ namespace MovieAggregator.WebApi.Cache
 {
     public class InMemoryMovieCacheFactory : IMovieCacheEntityFactory
     {
-        public IMovieCacheEntry CreateEntry(string searchString, MovieAggregatedContentDTO data)
+        public IMovieCacheEntry CreateEntry(string searchString, MovieContentDTO data)
         {
             if (string.IsNullOrWhiteSpace(searchString))
             {

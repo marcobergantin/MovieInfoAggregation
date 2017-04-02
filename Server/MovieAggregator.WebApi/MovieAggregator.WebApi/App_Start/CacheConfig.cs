@@ -1,17 +1,18 @@
 ﻿using MovieAggregator.WebApi.Cache;
-using System;
-using System.Configuration;
+using MovieAggregator.WebApi.Helpers;
 
 namespace MovieAggregator.WebApi.App_Start
 {
     public static class CacheConfig
     {
-        public static CacheType GetConfigurableCache()
+        public static CacheType GetConfigurableCacheType()
         {
-            string configCacheType = ConfigurationManager.AppSettings["CacheType"];
-            CacheType cacheType;
-            Enum.TryParse(configCacheType, out cacheType);
-            return cacheType;
+            return ConfigurationHelper.GetValueFromConfiguration<CacheType>("CacheType");
+        }
+
+        public static uint GetConfigurableCacheExpirationInterval()
+        {
+            return ConfigurationHelper.GetValueFromConfiguration<uint>("CacheExiprationInterval");
         }
     }
 }

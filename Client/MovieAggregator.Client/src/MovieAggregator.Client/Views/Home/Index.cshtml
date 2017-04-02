@@ -14,7 +14,10 @@
     </form>
 </div>
 
-@if (Model.MovieInfo != null)
+@if (Model.HasEntries())
 {
-    @Html.Partial("_MovieDetails", Model.MovieInfo)
+    foreach (var entry in Model.MovieInfo.Entries)
+    {
+        @Html.Partial("_MovieDetails", entry)
+    }
 }

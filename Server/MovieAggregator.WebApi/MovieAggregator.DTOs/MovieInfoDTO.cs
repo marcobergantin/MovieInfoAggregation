@@ -1,11 +1,13 @@
-﻿namespace MovieAggregator.DTOs
+﻿using System;
+
+namespace MovieAggregator.DTOs
 {
     public class MovieInfoDTO
     {
         public string Title { get; set; }
         public string Year { get; set; }
         public string Rated { get; set; }
-        public string Released { get; set; }
+        public DateTime? Released { get; set; }
         public string Runtime { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }

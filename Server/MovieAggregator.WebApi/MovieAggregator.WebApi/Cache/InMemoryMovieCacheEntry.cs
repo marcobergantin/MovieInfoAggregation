@@ -5,7 +5,7 @@ namespace MovieAggregator.WebApi.Cache
 {
     public class InMemoryMovieCacheEntry : BaseMovieCacheEntry
     {
-        public InMemoryMovieCacheEntry(string searchString, MovieAggregatedContentDTO data) :
+        public InMemoryMovieCacheEntry(string searchString, MovieContentDTO data) :
             base(searchString, data)
         {
         }

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAggregator.Caching.Mon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAggregator.Caching.Common", "MovieAggregator.Caching.Common\MovieAggregator.Caching.Common.csproj", "{1A393528-50F4-4DFA-9CE8-37B0C6C9D197}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAggregator.TMDb.ApiInteraction", "MovieAggregator.TMDb.ApiInteraction\MovieAggregator.TMDb.ApiInteraction.csproj", "{13776DCA-284D-436C-9466-30638B4D7B66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1A393528-50F4-4DFA-9CE8-37B0C6C9D197}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A393528-50F4-4DFA-9CE8-37B0C6C9D197}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A393528-50F4-4DFA-9CE8-37B0C6C9D197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13776DCA-284D-436C-9466-30638B4D7B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13776DCA-284D-436C-9466-30638B4D7B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13776DCA-284D-436C-9466-30638B4D7B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13776DCA-284D-436C-9466-30638B4D7B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
