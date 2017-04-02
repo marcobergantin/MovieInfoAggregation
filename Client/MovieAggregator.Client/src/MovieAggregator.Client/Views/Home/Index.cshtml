@@ -1,47 +1,20 @@
 ﻿@model HomeViewModel
 
 @{
-    ViewBag.Title = "MovieAggregator Client";
+    @if (Model.HasEntries())
+    {
+        ViewBag.Title = "MovieAggregator Client";
+    }
 }
 
-<table style="width:100%;">
-    <tr>
-        <td>
-            <form method="post">
-                <div>
-                    <label asp-for="SearchQuery"></label>
-                    <input asp-for="SearchQuery" />
-                    <input type="submit" value="Search" />
-                </div>
-            </form>
-
-        </td>
-        @if (Model.CanShowPages())
-        {
-            <td align="right">
-                <div align="right">
-                    Page: @(Model.MovieInfo.PageIndex + 1) / @Model.MovieInfo.NumberOfPages
-                </div>
-            </td>
-        }
-</tr>
-</table>
+@await Html.PartialAsync("_Header", @Model)
 
 @if (Model.HasEntries())
 { 
     foreach (var entry in Model.MovieInfo.Entries)
     {
-        @Html.Partial("_MovieDetails", entry)
-    }
-
-    for (int i = 0; i < Model.MovieInfo.NumberOfPages; i++)
-    {
-        if (i != Model.MovieInfo.PageIndex)
-        {
-            <a asp-controller="Home"
-               asp-action="ShowPage"
-               asp-route-searchQuery="@Model.SearchQuery"
-               asp-route-pageIndex="@i">@(i + 1)</a>
-        }
+        @await Html.PartialAsync("_MovieDetails", entry)
     }
 }
+
+@await Html.PartialAsync("_Footer", @Model)

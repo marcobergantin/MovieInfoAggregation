@@ -1,0 +1,30 @@
+﻿@model HomeViewModel
+
+<table style="width:100%;">
+    <tr>
+        <td>
+            @*<form method="post">
+                <div>
+                    <input asp-for="@Model.SearchQuery" />
+                    <a asp-controller="Home"
+                       asp-action="Search">Search</a>
+                </div>
+            </form>*@
+            <form method="post">
+                <div>
+                    <input asp-for="SearchQuery" />
+                    <input type="submit" value="Search" />
+                </div>
+            </form>
+
+        </td>
+        @if (Model.CanShowPages())
+        {
+            <td align="right">
+                <div align="right">
+                    Page: @(Model.MovieInfo.PageIndex + 1) / @Model.MovieInfo.NumberOfPages
+                </div>
+            </td>
+        }
+    </tr>
+</table>

@@ -1,38 +1,34 @@
 ﻿@model MovieContentEntryViewModel
 
-<section class="panel panel-default">
+<table width="600" align="center">
 
-    <table width="600" align="center">
+    <tr>
+        <td colspan="2">
+            <h3 class="panel-heading">@Model.Info.GetDetailsHeader()</h3>
+        </td>
+    </tr>
 
-        <tr>
-            <td colspan="2">
-                <h3 class="panel-heading">@Model.Info.GetDetailsHeader()</h3>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <img src="@Url.Content(Model.Info.PosterUrl)" style="width:150px;height:250px" />
+        </td>           
+        <td>
+            @if (Model.HasTrailer())
+            {
+                <iframe src="@Model.Trailer.EmbedUrl"
+                        width="450"
+                        height="250"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            }
+        </td>
 
-        <tr>
-            <td>
-                <img src="@Url.Content(Model.Info.PosterUrl)" style="width:150px;height:250px" />
-            </td>           
-            <td>
-                @if (Model.HasTrailer())
-                {
-                    <iframe src="@Model.Trailer.EmbedUrl"
-                            width="450"
-                            height="250"
-                            frameborder="0"
-                            allowfullscreen></iframe>
-                }
-            </td>
+    </tr>
 
-        </tr>
+    <tr>
+        <td colspan="2">
+            @Model.Info.Plot
+        </td>
+    </tr>
 
-        <tr>
-            <td colspan="2">
-                @Model.Info.Plot
-            </td>
-        </tr>
-
-    </table>
-
-</section>
+</table>
