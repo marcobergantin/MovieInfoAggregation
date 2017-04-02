@@ -21,12 +21,6 @@ namespace MovieAggregator.WebApi
                     SetupInMemoryCache(container);
                     break;
             }
-
-            uint cacheExpirationInterval = GetConfigurableCacheExpirationInterval();
-            if (cacheExpirationInterval > 0)
-            {
-                container.Resolve<IMovieCacheService>().SetExpirationInterval(cacheExpirationInterval);
-            }
         }
 
         private static void SetupMongoDBCache(IUnityContainer container)
@@ -47,7 +41,7 @@ namespace MovieAggregator.WebApi
             return ConfigurationHelper.GetValueFromConfiguration<CacheType>("CacheType");
         }
 
-        private static uint GetConfigurableCacheExpirationInterval()
+        public static uint GetConfigurableCacheExpirationInterval()
         {
             return ConfigurationHelper.GetValueFromConfiguration<uint>("CacheExiprationInterval");
         }

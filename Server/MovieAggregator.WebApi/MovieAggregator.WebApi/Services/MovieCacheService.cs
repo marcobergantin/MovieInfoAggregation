@@ -17,7 +17,7 @@ namespace MovieAggregator.WebApi.Services
         {
             _cacheRepository = cacheRepository;
             _entityFactory = entityFactory;
-            _expirationInterval = TimeSpan.FromSeconds(DefaultExpirationInterval);
+            _expirationInterval = TimeSpan.FromSeconds(CacheConfig.GetConfigurableCacheExpirationInterval());
         }
 
         public Task AddToCache(string searchString, MovieContentDTO content)
@@ -44,6 +44,11 @@ namespace MovieAggregator.WebApi.Services
 
         public void SetExpirationInterval(uint seconds)
         {
+            if (seconds == 0)
+            {
+                seconds = DefaultExpirationInterval;
+            }
+
             _expirationInterval = TimeSpan.FromSeconds(seconds);
         }
     }
