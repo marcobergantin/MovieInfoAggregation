@@ -31,7 +31,8 @@ namespace MovieAggregator.WebApi.Controllers
                     if (data.Entries != null)
                     {
                         data.NumberOfPages = (uint)(Math.Ceiling(data.Entries.Count() / (double)pageSize));
-                        data.Entries = data.Entries.Skip(pageIndex * pageSize).Take(pageSize);
+                        data.PageIndex = (byte)Math.Min(pageIndex, data.NumberOfPages - 1); //avoids skipping all results if pageIndex is too big
+                        data.Entries = data.Entries.Skip(data.PageIndex * pageSize).Take(pageSize);
                     }
 
                     return Ok(data);
