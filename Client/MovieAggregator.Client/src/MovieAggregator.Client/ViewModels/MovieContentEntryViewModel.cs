@@ -11,13 +11,17 @@ namespace MovieAggregator.Client.ViewModels
         public MovieInfoViewModel Info { get; set; }
         public MovieTrailerViewModel Trailer { get; set; }
 
-        public MovieContentEntryViewModel(MovieContentEntryDTO dto)
+        public MovieContentEntryViewModel(MovieContentEntryDTO movieContent)
         {
-            if (dto == null)
-                throw new ArgumentException($"{nameof(dto)} cannot be null");
+            if (movieContent.Info != null)
+            {
+                Info = new MovieInfoViewModel(movieContent.Info);
+            }
 
-            Info = new MovieInfoViewModel(dto.Info);
-            Trailer = new MovieTrailerViewModel(dto.Trailer);
+            if (movieContent.Trailer != null)
+            {
+                Trailer = new MovieTrailerViewModel(movieContent.Trailer);
+            }
         }
 
         public bool HasTrailer()

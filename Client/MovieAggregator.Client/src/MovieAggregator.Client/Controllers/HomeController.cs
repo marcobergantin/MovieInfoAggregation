@@ -20,6 +20,15 @@ namespace MovieAggregator.Client.Controllers
             return View("Index", new HomeViewModel());
         }
 
+        public async Task<IActionResult> ShowPage(string searchQuery, byte pageIndex)
+        {
+            var movieInfo = await _movieService.GetMovieInfo(searchQuery, pageIndex);
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.SearchQuery = searchQuery;
+            homeViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
+            return View("Index", homeViewModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Index(HomeViewModel inputViewModel)
         {

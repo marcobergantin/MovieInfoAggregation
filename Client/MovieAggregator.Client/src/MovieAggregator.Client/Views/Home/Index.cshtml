@@ -15,9 +15,17 @@
 </div>
 
 @if (Model.HasEntries())
-{
+{ 
     foreach (var entry in Model.MovieInfo.Entries)
     {
         @Html.Partial("_MovieDetails", entry)
+    }
+
+    for (int i = 0; i < Model.MovieInfo.NumberOfPages; i++)
+    { 
+        <a asp-controller="Home" 
+           asp-action="ShowPage" 
+           asp-route-searchQuery="@Model.SearchQuery"
+           asp-route-pageIndex="@i">@(i+1)</a>
     }
 }

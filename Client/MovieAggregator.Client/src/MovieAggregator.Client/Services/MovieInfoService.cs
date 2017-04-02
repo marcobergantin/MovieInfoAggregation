@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MovieAggregator.Client.DTOs;
 using MovieAggregator.Client.Interfaces;
-using System.Net.Http;
 using System.Threading.Tasks;
+using MovieAggregator.Client.Services.Helpers;
 
 namespace MovieAggregator.Client.Services
 {
@@ -22,17 +22,34 @@ namespace MovieAggregator.Client.Services
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = await client.GetAsync(MovieInfoEndpoint + "api/Movie?movieTitle=" + movieTitle);
-                    response.EnsureSuccessStatusCode();
-                    return await response.Content.ReadAsAsync<MovieContentDTO>();
-                }
+                return await HttpHelper.GetFromApi<MovieContentDTO>(GetUrlWithMovieTitleParameter(movieTitle));
             }
             catch
             {
                 return null;
             }            
+        }
+
+        public async Task<MovieContentDTO> GetMovieInfo(string movieTitle, byte pageIndex)
+        {
+            try
+            {
+                return await HttpHelper.GetFromApi<MovieContentDTO>(GetPagedUrl(movieTitle, pageIndex));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private string GetUrlWithMovieTitleParameter(string movieTitle)
+        {
+            return $"{MovieInfoEndpoint}api/Movie?movieTitle={movieTitle}";
+        }
+
+        private string GetPagedUrl(string movieTitle, byte pageIndex)
+        {
+            return $"{GetUrlWithMovieTitleParameter(movieTitle)}&pageIndex={pageIndex}";
         }
     }
 }

@@ -7,14 +7,14 @@ namespace MovieAggregator.Client.ViewModels
     {
         public string EmbedUrl { get; set; }
 
-        public MovieTrailerViewModel(MovieTrailerDTO dto)
+        public MovieTrailerViewModel(MovieTrailerDTO trailer)
         {
-            if (dto == null)
-                throw new ArgumentException($"{nameof(dto)} cannot be null");
-
-            if (Uri.IsWellFormedUriString(dto.EmbedURL, UriKind.Absolute))
+            if (trailer != null)
             {
-                EmbedUrl = dto.EmbedURL;
+                if (Uri.IsWellFormedUriString(trailer.EmbedURL, UriKind.Absolute))
+                {
+                    EmbedUrl = trailer.EmbedURL;
+                }
             }
         }
     }

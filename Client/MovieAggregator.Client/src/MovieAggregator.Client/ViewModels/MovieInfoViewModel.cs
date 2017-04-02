@@ -11,19 +11,19 @@ namespace MovieAggregator.Client.ViewModels
         public string Plot { get; set; }
         public string PosterUrl { get; set; }
 
-        public MovieInfoViewModel(MovieInfoDTO dto)
+        public MovieInfoViewModel(MovieInfoDTO movieInfo)
         {
-            if (dto == null)
-                throw new ArgumentException($"{nameof(dto)} cannot be null");
-
-            Title = dto.Title;
-            Year = dto.Year;
-            Released = dto.Released;
-            Plot = dto.Plot;
-
-            if (Uri.IsWellFormedUriString(dto.Poster, UriKind.Absolute))
+            if (movieInfo != null)
             {
-                PosterUrl = dto.Poster;
+                Title = movieInfo.Title;
+                Year = movieInfo.Year;
+                Released = movieInfo.Released;
+                Plot = movieInfo.Plot;
+
+                if (Uri.IsWellFormedUriString(movieInfo.Poster, UriKind.Absolute))
+                {
+                    PosterUrl = movieInfo.Poster;
+                }
             }
         }
 
@@ -32,7 +32,7 @@ namespace MovieAggregator.Client.ViewModels
             return $"{Title}{GetReleaseYearString()}";
         }
 
-        public string GetReleaseYearString()
+        private string GetReleaseYearString()
         {
             string yearString = GetReleaseYear();
             if (string.IsNullOrWhiteSpace(yearString) == false)
@@ -43,7 +43,7 @@ namespace MovieAggregator.Client.ViewModels
             return string.Empty;
         }
 
-        public string GetReleaseYear()
+        private string GetReleaseYear()
         {
             if (Released.HasValue)
                 return Released.Value.Year.ToString();

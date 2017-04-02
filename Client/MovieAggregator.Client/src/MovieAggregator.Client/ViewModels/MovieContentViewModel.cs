@@ -1,7 +1,7 @@
 ﻿using MovieAggregator.Client.DTOs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MovieAggregator.Client.ViewModels
 {
@@ -14,21 +14,23 @@ namespace MovieAggregator.Client.ViewModels
 
         public MovieContentViewModel(MovieContentDTO dto)
         {
-            if (dto == null)
-                throw new ArgumentException($"{nameof(dto)} cannot be null");
-
-            PageIndex = dto.PageIndex;
-            if (dto.Entries != null)
+            if (dto != null)
             {
-                PageSize = (uint)dto.Entries.Count();
-                List<MovieContentEntryViewModel> entriesViewModels = new List<MovieContentEntryViewModel>();
-                foreach (var e in dto.Entries)
+                PageIndex = dto.PageIndex;
+                NumberOfPages = dto.NumberOfPages;
+                if (dto.Entries != null)
                 {
-                    entriesViewModels.Add(new MovieContentEntryViewModel(e));
+                    PageSize = (uint)dto.Entries.Count();
+                    AddEntriesFromDTO(dto.Entries);
                 }
-
-                Entries = entriesViewModels;
             }
+        }
+
+        private void AddEntriesFromDTO(IEnumerable<MovieContentEntryDTO> entries)
+        {
+            List<MovieContentEntryViewModel> entriesViewModels = new List<MovieContentEntryViewModel>();
+            Parallel.ForEach(entries, e => entriesViewModels.Add(new MovieContentEntryViewModel(e)));
+            Entries = entriesViewModels;
         }
     }
 }
