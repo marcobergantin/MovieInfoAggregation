@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using MovieAggregator.Caching.MongoDB.Entities;
 using MovieAggregator.Contracts;
+using System;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.Caching.MongoDB
@@ -32,15 +33,15 @@ namespace MovieAggregator.Caching.MongoDB
         public async Task<IMovieCacheEntry> Get(string searchString)
         {
             var cursor = await _cacheCollection.FindAsync(c =>
-                (c as MongoDBMovieCacheEntry).SeachString == searchString);
+                ((MongoDBMovieCacheEntry)c).SeachString == searchString);
 
             return await cursor.FirstOrDefaultAsync();
         }
 
-        public Task Remove(string seachString)
+        public Task Remove(string searchString)
         {
             return _cacheCollection.DeleteOneAsync(c =>
-                (c as MongoDBMovieCacheEntry).SeachString == seachString);
+                ((MongoDBMovieCacheEntry)c).SeachString == searchString);
         }
     }
 }
