@@ -5,7 +5,6 @@ namespace MovieAggregator.Client.Interfaces
 {
     public interface IMovieService
     {
-        Task<MovieContentDTO> GetMovieInfo(string movieTitle);
         Task<MovieContentDTO> GetMovieInfo(string movieTitle, byte pageIndex);
     }
 }

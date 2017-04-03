@@ -14,27 +14,17 @@ namespace MovieAggregator.Client.Controllers
             _movieService = movieService;
         }
 
-        [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchQuery = null, byte pageIndex = 0)
         {
-            return View("Index", new HomeViewModel());
-        }
-
-        public async Task<IActionResult> ShowPage(string searchQuery, byte pageIndex)
-        {
-            var movieInfo = await _movieService.GetMovieInfo(searchQuery, pageIndex);
             var homeViewModel = new HomeViewModel();
-            homeViewModel.SearchQuery = searchQuery;
-            homeViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
-            return View("Index", homeViewModel);
-        }
+            if (string.IsNullOrWhiteSpace(searchQuery) == false)
+            {
+                var movieInfo = await _movieService.GetMovieInfo(searchQuery, pageIndex);
+                homeViewModel.SearchQuery = searchQuery;
+                homeViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(HomeViewModel inputViewModel)
-        {
-            var movieInfo = await _movieService.GetMovieInfo(inputViewModel.SearchQuery);
-            inputViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
-            return View("Index", inputViewModel);
+            return View("Index", homeViewModel);
         }
     }
 }

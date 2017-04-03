@@ -7,7 +7,7 @@
         if (i != Model.MovieInfo.PageIndex)
         {
             <a asp-controller="Home"
-               asp-action="ShowPage"
+               asp-action="Index"
                asp-route-searchQuery="@Model.SearchQuery"
                asp-route-pageIndex="@i">@(i + 1)</a>
         }

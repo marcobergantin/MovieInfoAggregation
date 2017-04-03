@@ -18,19 +18,7 @@ namespace MovieAggregator.Client.Services
             }
         }
 
-        public async Task<MovieContentDTO> GetMovieInfo(string movieTitle)
-        {
-            try
-            {
-                return await HttpHelper.GetFromApi<MovieContentDTO>(GetUrlWithMovieTitleParameter(movieTitle));
-            }
-            catch
-            {
-                return null;
-            }            
-        }
-
-        public async Task<MovieContentDTO> GetMovieInfo(string movieTitle, byte pageIndex)
+        public async Task<MovieContentDTO> GetMovieInfo(string movieTitle, byte pageIndex = 0)
         {
             try
             {
@@ -38,18 +26,14 @@ namespace MovieAggregator.Client.Services
             }
             catch
             {
+                //log exception
                 return null;
             }
         }
 
-        private string GetUrlWithMovieTitleParameter(string movieTitle)
-        {
-            return $"{MovieInfoEndpoint}api/Movie?movieTitle={movieTitle}";
-        }
-
         private string GetPagedUrl(string movieTitle, byte pageIndex)
         {
-            return $"{GetUrlWithMovieTitleParameter(movieTitle)}&pageIndex={pageIndex}";
+            return $"{MovieInfoEndpoint}api/Movie?movieTitle={movieTitle}&pageIndex={pageIndex}";
         }
     }
 }
