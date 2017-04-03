@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Linq;
+using MovieAggregator.DTOs;
 
 namespace MovieAggregator.WebApi.Controllers
 {
@@ -27,15 +28,7 @@ namespace MovieAggregator.WebApi.Controllers
                 var data = await _movieService.GetAggregatedInfo(movieTitle);
                 if (data != null)
                 {
-                    data.PageIndex = pageIndex;
-                    if (data.Entries != null)
-                    {
-                        data.NumberOfPages = (uint)(Math.Ceiling(data.Entries.Count() / (double)pageSize));
-                        data.PageIndex = (byte)Math.Min(pageIndex, data.NumberOfPages - 1); //avoids skipping all results if pageIndex is too big
-                        data.Entries = data.Entries.Skip(data.PageIndex * pageSize).Take(pageSize);
-                    }
-
-                    return Ok(data);
+                    return Ok(HandlePagination(data, pageIndex, pageSize));
                 }
 
                 return NotFound();
@@ -44,6 +37,19 @@ namespace MovieAggregator.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+
+        private MovieContentDTO HandlePagination(MovieContentDTO data, byte pageIndex, byte pageSize)
+        {
+            data.PageIndex = pageIndex;
+            if (data.Entries != null)
+            {
+                data.NumberOfPages = (uint)(Math.Ceiling(data.Entries.Count() / (double)pageSize));
+                //avoids skipping all results if pageIndex is too big
+                data.PageIndex = (byte)Math.Min(pageIndex, data.NumberOfPages - 1); 
+                data.Entries = data.Entries.Skip(data.PageIndex * pageSize).Take(pageSize);
+            }
+            return data;
         }
     }
 }
