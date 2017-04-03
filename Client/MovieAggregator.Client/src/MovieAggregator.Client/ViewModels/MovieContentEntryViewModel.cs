@@ -24,6 +24,22 @@ namespace MovieAggregator.Client.ViewModels
             }
         }
 
+        public string GetDetailsHeader()
+        {
+            if (Info == null)
+                return string.Empty;
+
+            return $"{Info.Title}{Info.GetReleaseYearString()}";
+        }
+
+        public string GetPosterUrl()
+        {
+            if (Info == null)
+                return string.Empty;
+
+            return Info.PosterUrl;
+        }
+
         public bool HasTrailer()
         {
             return Trailer != null && !string.IsNullOrWhiteSpace(Trailer.EmbedUrl);

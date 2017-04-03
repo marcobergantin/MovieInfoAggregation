@@ -4,13 +4,13 @@
 
     <tr>
         <td colspan="2">
-            <h3 class="panel-heading">@Model.Info.GetDetailsHeader()</h3>
+            <h3 class="panel-heading">@Model.GetDetailsHeader()</h3>
         </td>
     </tr>
 
     <tr>
         <td>
-            <img src="@Url.Content(Model.Info.PosterUrl)" style="width:150px;height:250px" />
+            <img src="@Url.Content(Model.GetPosterUrl())" style="width:150px;height:250px" />
         </td>           
         <td>
             @if (Model.HasTrailer())

@@ -14,7 +14,7 @@ namespace MovieAggregator.TMDb.ApiInteraction
             var searchResults = await client.SearchMovieAsync(searchString);
             List<MovieInfoDTO> returnList = new List<MovieInfoDTO>();
 
-            searchResults.Results.ForEach(r =>
+            Parallel.ForEach(searchResults.Results, r =>
                 returnList.Add(new MovieInfoDTO()
                     {
                         Title = r.Title,

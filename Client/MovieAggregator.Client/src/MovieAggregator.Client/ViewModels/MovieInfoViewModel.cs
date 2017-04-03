@@ -27,12 +27,7 @@ namespace MovieAggregator.Client.ViewModels
             }
         }
 
-        public string GetDetailsHeader()
-        {
-            return $"{Title}{GetReleaseYearString()}";
-        }
-
-        private string GetReleaseYearString()
+        public string GetReleaseYearString()
         {
             string yearString = GetReleaseYear();
             if (string.IsNullOrWhiteSpace(yearString) == false)
