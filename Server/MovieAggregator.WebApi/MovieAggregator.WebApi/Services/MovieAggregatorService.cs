@@ -1,5 +1,6 @@
 ﻿using MovieAggregator.Contracts;
 using MovieAggregator.DTOs;
+using MovieAggregator.WebApi.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,13 +42,15 @@ namespace MovieAggregator.WebApi.Services
             {
                 if (string.IsNullOrEmpty(entry.Title) == false)
                 {
-                    var dto = new MovieContentEntryDTO();
-                    dto.Info = entry;
-                    dto.Trailer = await _trailerProvider.GetTrailer(entry.Title, GetReleasedDateParameter(entry));
-                    results.Add(dto);
+                    results.Add(new MovieContentEntryDTO()
+                    {
+                        Info = entry,
+                        Trailer = await _trailerProvider.GetTrailer(entry.Title, GetReleasedDateParameter(entry))
+                    });
                 }
             }
 
+            results.Sort(new MovieContentEntryDTOComparer());
             var returnObj = new MovieContentDTO()
             {
                 Entries = results
