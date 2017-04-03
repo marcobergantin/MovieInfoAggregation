@@ -11,6 +11,20 @@ namespace MovieAggregator.WebApi.Helpers
             var xInfo = x.Info;
             var yInfo = y.Info;
 
+            if (xInfo == null)
+            {
+                if (yInfo == null)
+                {
+                    return 0;
+                }
+
+                return -1;
+            }
+            else if (yInfo == null)
+            {
+                return 1;
+            }
+
             if (xInfo.Released.HasValue && yInfo.Released.HasValue)
             {
                 return -Math.Sign((xInfo.Released.Value - yInfo.Released.Value).Days);
