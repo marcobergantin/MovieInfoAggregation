@@ -6,8 +6,7 @@ namespace MovieAggregator.Client.Extensions
 {
     public static class IApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseNodeModules(this IApplicationBuilder app, 
-                                                        string root)
+        public static IApplicationBuilder UseNodeModules(this IApplicationBuilder app, string root)
         {
             string path = Path.Combine(root, "node_modules");
             var fileProvider = new PhysicalFileProvider(path);

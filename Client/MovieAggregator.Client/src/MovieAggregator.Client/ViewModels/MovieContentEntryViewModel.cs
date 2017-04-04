@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MovieAggregator.Client.DTOs;
+﻿using MovieAggregator.Client.DTOs;
 
 namespace MovieAggregator.Client.ViewModels
 {

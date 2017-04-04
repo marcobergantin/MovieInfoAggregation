@@ -24,7 +24,7 @@ namespace MovieAggregator.Client.Controllers
                 homeViewModel.MovieInfo = new MovieContentViewModel(movieInfo);
             }
 
-            return View("Index", homeViewModel);
+            return View(nameof(Index), homeViewModel);
         }
     }
 }

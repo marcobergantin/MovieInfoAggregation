@@ -27,7 +27,7 @@ namespace MovieAggregator.Client
         {
             services.AddMvc();         
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddTransient<IMovieService, MovieInfoService>();
+            services.AddSingleton<IMovieService, MovieInfoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
