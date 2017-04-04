@@ -6,9 +6,13 @@ Assignment
 Create a webpage on which you can search for movie trailers.
 
 _Use an API of an online movie database (e.g. IMDB or Rotten Tomatoes);
+
 _Use an API of an online video service (e.g. YouTube or Vimeo);
+
 _Create your own WebAPI as middleware to retrieve the results of both services and aggregate them;
+
 _Cache the aggregated data for performance;
+
 _Make the search as smart as you can;
 
 MovieAggregator.Client is a ASP.NET Core MVC project (so .NET Core and the VS tooling for it are prerequisites)
