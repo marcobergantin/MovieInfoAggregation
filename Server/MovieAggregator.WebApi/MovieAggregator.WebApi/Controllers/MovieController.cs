@@ -34,8 +34,10 @@ namespace MovieAggregator.WebApi.Controllers
                 return NotFound();
             }
             catch (Exception ex)
-            {
+            {   
+                //if development
                 return InternalServerError(ex);
+                //else return a generic 500 with a default error message and log exception
             }
         }
 

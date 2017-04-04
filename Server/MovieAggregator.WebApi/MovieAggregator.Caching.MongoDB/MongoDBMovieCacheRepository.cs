@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using MovieAggregator.Caching.MongoDB.Entities;
 using MovieAggregator.Contracts;
-using System;
 using System.Threading.Tasks;
 
 namespace MovieAggregator.Caching.MongoDB
@@ -32,16 +31,21 @@ namespace MovieAggregator.Caching.MongoDB
 
         public async Task<IMovieCacheEntry> Get(string searchString)
         {
-            var cursor = await _cacheCollection.FindAsync(c =>
-                ((MongoDBMovieCacheEntry)c).SeachString == searchString);
+            /* could not group the matching condition along with the one in the Remove method, 
+               nor use string.Equals with the ignore case option, because the driver
+               doens't seem to be able to translate such a lambda to a mongo db query
+               also, having to cast the entries is not my favorite thing, but the driver requires this as well
+               Moreover, if the MongoDBMovieCacheEntry class and the structure of the documents in the db do no match,
+               we'll have some troubles here -> updates in documents structure have to be reflected in the corresponding class
+               Also not thrilled about having to do this double await */
 
+            var cursor = await _cacheCollection.FindAsync(c => ((MongoDBMovieCacheEntry)c).SeachString == searchString);
             return await cursor.FirstOrDefaultAsync();
         }
 
         public Task Remove(string searchString)
         {
-            return _cacheCollection.DeleteOneAsync(c =>
-                ((MongoDBMovieCacheEntry)c).SeachString == searchString);
+            return _cacheCollection.DeleteOneAsync(c => ((MongoDBMovieCacheEntry)c).SeachString == searchString);
         }
     }
 }

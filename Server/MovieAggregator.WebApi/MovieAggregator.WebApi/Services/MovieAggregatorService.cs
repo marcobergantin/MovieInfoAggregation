@@ -70,7 +70,7 @@ namespace MovieAggregator.WebApi.Services
             int year;
             if (int.TryParse(info.Year, out year))
             {
-                return new DateTime(year, 6, 15);
+                return new DateTime(year, 6, 15); //pick a date in the middle of the year ("average" day/date)
             }
 
             return null;

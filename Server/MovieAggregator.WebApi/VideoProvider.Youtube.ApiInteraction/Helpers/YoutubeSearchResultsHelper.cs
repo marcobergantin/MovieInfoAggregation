@@ -7,6 +7,7 @@ namespace VideoProvider.Youtube.ApiInteraction.Helpers
 {
     public static class YoutubeSearchResultsHelper
     {
+        //try to get the video that most likely is the trailer for the movie
         public static SearchResult FilterSearchResults(string movieTitle, string yearString, IList<SearchResult> results)
         {
             var subset = results.Where(r => r.TitleContains(movieTitle));

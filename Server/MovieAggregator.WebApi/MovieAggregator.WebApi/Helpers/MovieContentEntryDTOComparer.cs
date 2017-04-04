@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace MovieAggregator.WebApi.Helpers
 {
+    //sorts movies by release date descending
     public class MovieContentEntryDTOComparer : IComparer<MovieContentEntryDTO>
     {
         public int Compare(MovieContentEntryDTO x, MovieContentEntryDTO y)
