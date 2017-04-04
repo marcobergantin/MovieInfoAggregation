@@ -41,15 +41,16 @@ namespace MovieAggregator.WebApi.Controllers
 
         private MovieContentDTO HandlePagination(MovieContentDTO data, byte pageIndex, byte pageSize)
         {
-            data.PageIndex = pageIndex;
+            MovieContentDTO returnData = new MovieContentDTO();
+            returnData.PageIndex = pageIndex;
             if (data.Entries != null)
             {
-                data.NumberOfPages = (uint)(Math.Ceiling(data.Entries.Count() / (double)pageSize));
+                returnData.NumberOfPages = (uint)(Math.Ceiling(data.Entries.Count() / (double)pageSize));
                 //avoids skipping all results if pageIndex is too big
-                data.PageIndex = (byte)Math.Min(pageIndex, data.NumberOfPages - 1); 
-                data.Entries = data.Entries.Skip(data.PageIndex * pageSize).Take(pageSize);
+                returnData.PageIndex = (byte)Math.Min(pageIndex, returnData.NumberOfPages - 1);
+                returnData.Entries = data.Entries.Skip(returnData.PageIndex * pageSize).Take(pageSize);
             }
-            return data;
+            return returnData;
         }
     }
 }
