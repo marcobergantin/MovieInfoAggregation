@@ -16,7 +16,11 @@ _Cache the aggregated data for performance;
 _Make the search as smart as you can;
 
 MovieAggregator.Client is a ASP.NET Core MVC project (so .NET Core and the VS tooling for it are prerequisites)
+
 MovieAggregator.WebApi is a ASP.NET WebApi 2 project, targeting .NET framework 4.6.2. 
+
+It has no UI at all, so when running it and browsing to the main page, you'll get a 403.14 error with the relative page. Simply add "/swagger" to the URL in order to see the documentation.
+
 Would have liked to make this a .NET Core project as well. Didn't do that because at the moment there are no libraries for the interaction with youtube apis in that platform. Same goes for TMDb's api.
 I would have also liked to share the DTOs project between the two solutions, but the difference of target framework didn't allow it. 
 In a real case, a good practice might have been to publish a nuget package for it and install it in both solutions (would still need the same target framework for that though).
