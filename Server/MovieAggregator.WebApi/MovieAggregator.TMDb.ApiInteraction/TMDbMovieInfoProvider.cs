@@ -13,17 +13,17 @@ namespace MovieAggregator.TMDb.ApiInteraction
             var client = TMDbClientHelper.GetConfifuredClient();
             var searchResults = await client.SearchMovieAsync(searchString);
             List<MovieInfoDTO> returnList = new List<MovieInfoDTO>();
-
-            Parallel.ForEach(searchResults.Results, r =>
+            foreach (var result in searchResults.Results)
+            {
                 returnList.Add(new MovieInfoDTO()
-                    {
-                        Title = r.Title,
-                        Plot = r.Overview,
-                        Released = r.ReleaseDate,
-                        Language = r.OriginalLanguage,
-                        Poster = TMDbImageHelper.GetImageUrl(r.PosterPath)
-                })
-            );
+                {
+                    Title = result.Title,
+                    Plot = result.Overview,
+                    Released = result.ReleaseDate,
+                    Language = result.OriginalLanguage,
+                    Poster = TMDbImageHelper.GetImageUrl(result.PosterPath)
+                });
+            }
 
             return returnList;
         }

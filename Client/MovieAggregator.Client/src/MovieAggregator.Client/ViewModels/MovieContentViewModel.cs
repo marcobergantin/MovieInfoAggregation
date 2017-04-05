@@ -29,7 +29,11 @@ namespace MovieAggregator.Client.ViewModels
         private void AddEntriesFromDTO(IEnumerable<MovieContentEntryDTO> entries)
         {
             List<MovieContentEntryViewModel> entriesViewModels = new List<MovieContentEntryViewModel>();
-            Parallel.ForEach(entries, e => entriesViewModels.Add(new MovieContentEntryViewModel(e)));
+            foreach (var entry in entries)
+            {
+                entriesViewModels.Add(new MovieContentEntryViewModel(entry));
+            }
+
             Entries = entriesViewModels;
         }
     }
